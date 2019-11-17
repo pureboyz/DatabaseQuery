@@ -19,7 +19,7 @@ public class DatabaseQuery
 	public static void InsertQuery()
 	{
 		// DB 연결정보
-		DatabaseInfo di = new DatabaseInfo();
+		DatabaseInfo databaseInfo = new DatabaseInfo();
 		
 		Connection 			conn 	= null; 
 		PreparedStatement 	pstmt 	= null;
@@ -27,10 +27,10 @@ public class DatabaseQuery
 		try
 		{
 			// Driver 로드
-			Class.forName(di.getJDBC_DRIVER());
+			Class.forName(databaseInfo.getJDBC_DRIVER());
 			
 			// DB 연결
-			conn = DriverManager.getConnection(di.getURL(), di.getUSER(), di.getPASSWORD());
+			conn = DriverManager.getConnection(databaseInfo.getURL(), databaseInfo.getUSER(), databaseInfo.getPASSWORD());
 			System.out.println("Database Connection Success!!");
 			
 			// Data 대량 삽입
