@@ -16,7 +16,7 @@ import java.sql.SQLException;
  */
 public class DatabaseQuery
 {
-	public void InsertQuery()
+	public static void InsertQuery()
 	{
 		// DB 연결정보
 		DatabaseInfo di = new DatabaseInfo();
