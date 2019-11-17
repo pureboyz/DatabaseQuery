@@ -1,5 +1,8 @@
 package jdbc;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <pre>
  * Date 		: 2019. 11. 14.
@@ -13,6 +16,14 @@ public class ConnectionTest
 {
 	public static void main(String[] args)
 	{
-		DatabaseQuery.InsertQuery();
+		// InsertQuery
+//		DatabaseQuery.InsertQuery();
+		
+		// SelectQuery
+		List<Map<String, Object>> resultList = DatabaseQuery.SelectQuery();
+		for(int i=0; i<resultList.size(); i++)
+		{
+			System.out.println("Row " + i + " : " + resultList.get(i).toString());
+		}
 	}
 }

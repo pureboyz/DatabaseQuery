@@ -3,7 +3,12 @@ package jdbc;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <pre>
@@ -62,6 +67,83 @@ public class DatabaseQuery
 		{
 			e.printStackTrace();
 		}
+		finally
+		{
+			try
+			{
+				pstmt.close();
+				conn.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public static List<Map<String, Object>> SelectQuery()
+	{
+		// DB 연결정보
+		DatabaseInfo databaseInfo = new DatabaseInfo();
+		
+		Connection 					conn 		= null; 
+		PreparedStatement 			pstmt 		= null;
+		ResultSet 					resultSet 	= null;
+		List<Map<String, Object>>	resultList 	= new ArrayList<>();
+		
+		try
+		{
+			// Driver 로드
+			Class.forName(databaseInfo.getJDBC_DRIVER());
+			
+			// DB 연결
+			conn = DriverManager.getConnection(databaseInfo.getURL(), databaseInfo.getUSER(), databaseInfo.getPASSWORD());
+			System.out.println("Database Connection Success!!");
+			
+			// Query 준비
+			String sql = "SELECT * FROM QUERY_TEST WHERE SEQ <= ?";
+			pstmt = conn.prepareStatement(sql);
+			
+			// Data Binding
+			pstmt.setInt(1, 6);
+			
+			// Query 실행
+			resultSet = pstmt.executeQuery();
+			
+			System.out.println("SELECT COMPLETE!!");
+			
+			// 얻은 Data를 List에 담기
+			while(resultSet.next())
+			{
+				Map<String, Object> resultMap = new HashMap<>();
+				
+				resultMap.put("column1", resultSet.getString("column1"));
+				resultMap.put("column2", resultSet.getString("column2"));
+				resultMap.put("column3", resultSet.getString("column3"));
+				resultMap.put("column4", resultSet.getString("column4"));
+				resultMap.put("column5", resultSet.getString("column5"));
+				
+				resultList.add(resultMap);
+			}
+		}
+		catch (ClassNotFoundException | SQLException e)
+		{
+			e.printStackTrace();
+		}
+		finally
+		{
+			try
+			{
+				pstmt.close();
+				conn.close();
+			}
+			catch (SQLException e)
+			{
+				e.printStackTrace();
+			}
+		}
+		
+		return resultList;
 	}
 	
 }
