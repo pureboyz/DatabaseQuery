@@ -21,6 +21,20 @@ import java.util.Map;
  */
 public class DatabaseQuery
 {
+	/**
+	 * <pre>
+	 * MethodName 	: InsertQuery
+	 * Date 		: 2019. 11. 17.
+	 * Author 		: pureboyz
+	 * 
+	 * ParamsType 	: 
+	 * ReturnType 	: void
+	 *
+	 * JDBC INSERT QUERY
+	 * sample data를 대량으로 insert할 때 사용.
+	 * 
+	 * </pre>
+	 */
 	public static void InsertQuery()
 	{
 		// DB 연결정보
@@ -47,11 +61,11 @@ public class DatabaseQuery
 				pstmt = conn.prepareStatement(sql);
 				
 				// Data Binding
-				pstmt.setString(1, "valueA"+i);
-				pstmt.setString(2, "valueB"+i);
-				pstmt.setString(3, "valueC"+i);
-				pstmt.setString(4, "valueD"+i);
-				pstmt.setString(5, "valueE"+i);
+				pstmt.setString(1, "valueAA"+i);
+				pstmt.setString(2, "valueBB"+i);
+				pstmt.setString(3, "valueCC"+i);
+				pstmt.setString(4, "valueDD"+i);
+				pstmt.setString(5, "valueEE"+i);
 				
 				// Query 실행
 				pstmt.executeUpdate(); // 영향을 미친 row의 수를 int형으로 return.
