@@ -14,8 +14,8 @@ public class ConnectionTest
 	public static void main(String[] args) {
 		DatabaseQuery dq = new DatabaseQuery();
 		
-		dq.SelectQuery();
-//		dq.InsertQuery();
+//		dq.SelectQuery();
+		dq.InsertQuery();
 //		dq.UpdateQuery();
 //		dq.DeleteQuery();
 	}

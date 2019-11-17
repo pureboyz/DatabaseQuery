@@ -12,7 +12,7 @@ package jdbc;
 public class DatabaseInfo
 {
 	private final String JDBC_DRIVER 	= "com.mysql.cj.jdbc.Driver";
-	private final String URL 			= "jdbc:mysql://pureboyz.ml:2473/blog?characterEncoding=UTF-8&serverTimezone=UTC";
+	private final String URL 			= "jdbc:mysql://pureboyz.ml:2473/query?characterEncoding=UTF-8&serverTimezone=UTC";
 	private final String USER	 		= "root";
 	private final String PASSWORD 		= "sung10820!";
 	

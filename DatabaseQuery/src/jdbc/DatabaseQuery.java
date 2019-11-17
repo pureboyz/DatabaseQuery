@@ -2,8 +2,8 @@ package jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * <pre>
@@ -16,21 +16,43 @@ import java.sql.Statement;
  */
 public class DatabaseQuery
 {
-	public void SelectQuery()
+	public void InsertQuery()
 	{
 		// DB 연결정보
 		DatabaseInfo di = new DatabaseInfo();
 		
-		Connection conn = null; 
-		Statement state = null;
+		Connection 			conn 	= null; 
+		PreparedStatement 	pstmt 	= null;
 		
 		try
 		{
+			// Driver 로드
 			Class.forName(di.getJDBC_DRIVER());
+			
+			// DB 연결
 			conn = DriverManager.getConnection(di.getURL(), di.getUSER(), di.getPASSWORD());
 			System.out.println("Database Connection Success!!");
-			state = conn.createStatement();
 			
+			// Data 대량 삽입
+			int rowsCnt = 10; // 삽입할 row의 수
+			for(int i=1; i<=rowsCnt; i++)
+			{
+				// Query 준비
+				String sql = "INSERT INTO QUERY_TEST (COLUMN1, COLUMN2, COLUMN3, COLUMN4, COLUMN5) VALUES(?, ?, ?, ?, ?)";
+				pstmt = conn.prepareStatement(sql);
+				
+				// Data Binding
+				pstmt.setString(1, "valueA"+i);
+				pstmt.setString(2, "valueB"+i);
+				pstmt.setString(3, "valueC"+i);
+				pstmt.setString(4, "valueD"+i);
+				pstmt.setString(5, "valueE"+i);
+				
+				// Query 실행
+				pstmt.executeUpdate(); // 영향을 미친 row의 수를 int형으로 return.
+			}
+			
+			System.out.println("INSERT COMPLETE!!");
 		}
 		catch (ClassNotFoundException e)
 		{
